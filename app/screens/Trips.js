@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { ImageBackground, StyleSheet, View, Text, FlatList, ActivityIndicator} from 'react-native';
 import NavContainer from '../components/NavContainer.js';
+import TripContainer from '../components/TripContainer.js';
 
 function Trips({navigation}) {
 
@@ -11,19 +12,24 @@ function Trips({navigation}) {
         const parsedTrips = await tripsResults.json();
         setTrips(parsedTrips);
       }
-      useEffect(() => {
-        getTrips();
-      }, []);
+    useEffect(() => {
+    getTrips();
+    }, []);
     return (
         <ImageBackground 
         style={styles.background}
         resizeMode='cover'
         source={require('../assets/map-background.jpeg')}
         >
-
-                <Text style={styles.text}>
-                    Trips: {trips[0].name}
-                </Text>
+            <Text style={styles.text}>Trips: </Text>
+            <TripContainer navigation={navigation} trips={trips} />
+            {/* {
+                trips && trips.map(trip => (
+                <View  key={trip._id}>
+                <TripContainer trip={trip} />
+                </View>
+                ))
+            }  */}
 
         <NavContainer navigation={navigation}/>
         </ImageBackground>

@@ -1,15 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Image, SafeAreaView, TouchableOpacity} from 'react-native';
 import colors from '../config/colors.js'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
 
 
 function NavContainer({navigation}) {
     const onMapPress = () => navigation.navigate("Trips")
     const onListPress = () => navigation.navigate("Checklist")
-    const onCameraPress=()=>navigation.navigate("Images")
+    const onCameraPress=() => navigation.navigate("Images")
 
     return (
         <>
