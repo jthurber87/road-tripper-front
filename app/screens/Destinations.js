@@ -4,7 +4,9 @@ import { justifyContent } from 'styled-system';
 import NavContainer from '../components/NavContainer.js';
 import TripContainer from '../components/TripContainer.js';
 
-function Trips({navigation}) {
+function Destinations({navigation}) {
+
+    
 
     const [trips, setTrips] = useState([])
 
@@ -20,17 +22,14 @@ function Trips({navigation}) {
         <ImageBackground 
         style={styles.background}
         resizeMode='cover'
-        source={require('../assets/trips-background.jpeg')}
+        source={require('../assets/map-background.jpeg')}
         >
             <Text style={styles.text}>Trips: </Text>
-            {/* <TripContainer navigation={navigation} trips={trips} /> */}
             {
                 trips && trips.map(trip => (
-                <TripContainer key={trip._id} tripName={trip.name} />
+                    <TripContainer key={trip._id} tripName={trip.name}/> 
                 ))
             } 
-
-        <NavContainer style={styles.nav} navigation={navigation}/>
         </ImageBackground>
     );
 }
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-start'
     },
     text: {
         fontSize: 25,
@@ -49,4 +48,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Trips;
+export default Destinations;

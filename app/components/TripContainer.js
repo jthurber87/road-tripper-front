@@ -3,32 +3,28 @@ import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import colors from '../config/colors';
 
-function TripContainer(props, {navigation}) {
-    const {trips} = props
-    console.log(trips[0].name)
-    const onCameraPress=() => navigation.navigate("Images")
+function TripContainer(props) {
+    const test = () => console.log("Going")
     return (
-        <TouchableOpacity onPress={onCameraPress}>
-            <View style={styles.tripBox}>
-                <Text style={styles.text}>{trips[0].name}</Text>
+        <TouchableOpacity style={styles.tripBox} onPress={test}>
+            <View >
+                <Text style={styles.text}>{props.tripName}</Text>
             </View>
         </TouchableOpacity>
-        
     );
 }
 
 const styles = StyleSheet.create({
     tripBox: {
-        width: '100%',
         borderRadius: 10,
         height: 40,
+        width: '95%',
         backgroundColor: colors.container,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start'
+        margin: 5
     },
     text: {
-        fontSize: 20,
-        marginLeft: 10
+        fontSize: 20, 
+        padding: 10  
     }
 })
 

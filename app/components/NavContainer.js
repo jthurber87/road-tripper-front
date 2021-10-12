@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
     iconContainer: {
         backgroundColor: colors.container,
         flexDirection: 'row',
-        width: '95%',
-        height: 70,
-        borderRadius: 10,
+        width: '100%',
+        padding: 10,
         justifyContent: 'space-evenly',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: '145%'
     },
     icon: {
         width: 50,

@@ -8,7 +8,7 @@ function WelcomeScreen({navigation}) {
 
     const onLoginPress=()=>navigation.navigate('Login')
     const onRegisterPress=()=>navigation.navigate('Register')
-    const onTestPress=()=>navigation.navigate('Trips')
+    const onTestPress=()=>navigation.navigate('Destinations')
 
     return (
 
