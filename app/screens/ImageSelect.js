@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker'
-import Constants from 'expo-constants'
-import {StyleSheet, View, Button, Text, Platform, Image} from 'react-native';
+import {ImageBackground, StyleSheet, View, SafeAreaView, Platform, Image, Text} from 'react-native';
+import colors from '../config/colors.js'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import NavContainer from '../components/NavContainer.js';
 
-export default function ImageSelect() {
+
+
+export default function ImageSelect({navigation}) {
     const [image, setImage] = useState(null)
-    useEffect( async () => {
+    useEffect(() => {
       if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-        if (status !== 'granted') {
-          alert('Permission denied!')
-        }
+        const { status } = ImagePicker.requestMediaLibraryPermissionsAsync()
       }
     }, [])
   
@@ -19,32 +19,44 @@ export default function ImageSelect() {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
-        aspect: [4,3],
+        aspect: [4,3], 
         quality: 1
       })
       console.log(result)
       if (!result.cancelled) {
-        setImage(result.uri)
+        setImage(result.uri) 
       }
     }
   
     return (
-        <View style={styles.container}>
-            <Button title="Choose Image" onPress={PickImage} /> 
-            {image && <Image source={{uri:image}} style={{
-                width: 200,
-                height: 200
-            }}/>}
-            <StatusBar style="auto"/>
+        <ImageBackground 
+        style={styles.background} 
+        resizeMode='cover'
+        source={require('../assets/images-background.jpg')}
+        >
+        <SafeAreaView />
+        <View onPress={PickImage} style={styles.inputContainer}>
+            <TouchableOpacity onPress={PickImage}>
+                <Image source={require('../assets/camera.png')} style={{width: 100, height: 100}}/>
+            </TouchableOpacity>
         </View>
+        {image && <Image source={{uri:image}} style={{width: 200, height: 200}}/>}
+        <NavContainer navigation={navigation}/>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
+    background: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      alignItems: 'center'
+    },
+    inputContainer: {
+      backgroundColor: colors.container,
+      margin: 20,
+      padding: 10,
+      bottom: 500,
+      borderRadius: 20
+    },
 })

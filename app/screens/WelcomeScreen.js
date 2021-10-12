@@ -1,5 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, Image, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import colors from '../config/colors.js'
 
@@ -7,7 +8,7 @@ function WelcomeScreen({navigation}) {
 
     const onLoginPress=()=>navigation.navigate('Login')
     const onRegisterPress=()=>navigation.navigate('Register')
-    const onTestPress=()=>navigation.navigate('Home')
+    const onTestPress=()=>navigation.navigate('Trips')
 
     return (
 
