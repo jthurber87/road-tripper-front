@@ -9,7 +9,6 @@ import Destinations from './app/screens/Destinations';
 import ImageSelect from './app/screens/ImageSelect';
 import Checklist from './app/screens/Checklist';
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {

@@ -1,21 +1,39 @@
 import React, {useState, useEffect} from 'react';
-import { ImageBackground, StyleSheet, View, Text, FlatList, ActivityIndicator} from 'react-native';
-import { justifyContent } from 'styled-system';
+import { ImageBackground, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import NavContainer from '../components/NavContainer.js';
-import TripContainer from '../components/TripContainer.js';
+import colors from '../config/colors.js';
+
+const TripContext = React.createContext()
 
 function Trips({navigation}) {
-
-    const [trips, setTrips] = useState([])
+    
+    const [trips, setTrips] = useState()
+    const [oneTrip, setOneTrip] = useState()
 
     const getTrips = async () => {
         const tripsResults = await fetch("http://10.0.0.89:9000/trips/");
         const parsedTrips = await tripsResults.json();
         setTrips(parsedTrips);
       }
-    useEffect(() => {
-    getTrips();
-    }, []);
+        useEffect(() => {
+        getTrips();
+        }, []);
+
+    const selectTrip = async(_id) => {
+        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + _id)
+        const parsedTrip = await foundTrip.json()
+        setOneTrip(parsedTrip)
+        navigation.navigate("Destinations", {
+            oneTrip: oneTrip
+        })
+    }
+
+    const deleteTrip = async (id) => {
+        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
+        const parsedTrip = await foundTrip.json()
+        console.log(parsedTrip)
+    }
+
     return (
         <ImageBackground 
         style={styles.background}
@@ -23,14 +41,21 @@ function Trips({navigation}) {
         source={require('../assets/trips-background.jpeg')}
         >
             <Text style={styles.text}>Trips: </Text>
-            {/* <TripContainer navigation={navigation} trips={trips} /> */}
             {
                 trips && trips.map(trip => (
-                <TripContainer key={trip._id} tripName={trip.name} />
+                <TouchableOpacity 
+                    style={styles.tripBox} 
+                    trip={trip} 
+                    key={trip._id}
+                    onPress={()=>selectTrip(trip._id)}
+                    onLongPress={()=>deleteTrip(trip._id)}>
+                    <Text style={styles.containerText}>
+                        {trip.name}
+                    </Text>
+                </TouchableOpacity>
                 ))
             } 
 
-        <NavContainer style={styles.nav} navigation={navigation}/>
         </ImageBackground>
     );
 }
@@ -39,14 +64,27 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-start',
     },
     text: {
         fontSize: 25,
         textAlign: 'center',
+        paddingBottom: 10,
         top: 10,
-        paddingBottom: 10
+        color: colors.secondary
     },
+    tripBox: {
+        borderRadius: 10,
+        height: 40,
+        width: '95%',
+        backgroundColor: colors.container,
+        margin: 5,
+        top: 20
+    },
+    containerText: {
+        fontSize: 20, 
+        padding: 10  
+    }
 })
 
 export default Trips;

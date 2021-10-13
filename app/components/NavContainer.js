@@ -4,7 +4,7 @@ import colors from '../config/colors.js'
 
 
 function NavContainer({navigation}) {
-    const onMapPress = () => navigation.navigate("Trips")
+    const onMapPress = () => navigation.navigate("Destinations")
     const onListPress = () => navigation.navigate("Checklist")
     const onCameraPress=() => navigation.navigate("Images")
 
