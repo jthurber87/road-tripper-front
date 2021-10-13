@@ -8,31 +8,31 @@ const TripContext = React.createContext()
 function Trips({navigation}) {
     
     const [trips, setTrips] = useState()
-    const [oneTrip, setOneTrip] = useState()
 
     const getTrips = async () => {
         const tripsResults = await fetch("http://10.0.0.89:9000/trips/");
         const parsedTrips = await tripsResults.json();
         setTrips(parsedTrips);
       }
-        useEffect(() => {
-        getTrips();
-        }, []);
-
-    const selectTrip = async(_id) => {
-        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + _id)
+      
+    const selectTrip = async(id) => {
+        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
         const parsedTrip = await foundTrip.json()
-        setOneTrip(parsedTrip)
         navigation.navigate("Destinations", {
-            oneTrip: oneTrip
+            oneTrip: parsedTrip
         })
     }
+
 
     const deleteTrip = async (id) => {
         const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
         const parsedTrip = await foundTrip.json()
         console.log(parsedTrip)
     }
+
+    useEffect(() => {
+        getTrips();
+    }, [trips]);
 
     return (
         <ImageBackground 

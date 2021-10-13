@@ -9,7 +9,6 @@ function NavContainer({navigation}) {
     const onCameraPress=() => navigation.navigate("Images")
 
     return (
-        <>
             <View style={styles.iconContainer}>
                 <TouchableOpacity onPress={onMapPress}>
                     <Image onPress={onMapPress} style={styles.icon} source={require('../assets/map.png')} />
@@ -21,8 +20,6 @@ function NavContainer({navigation}) {
                     <Image style={styles.icon} source={require('../assets/camera.png')}/>
                 </TouchableOpacity>
             </View>
-            <SafeAreaView />
-        </>
     );
 }
 
@@ -34,7 +31,7 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        marginTop: '145%'
+        alignItems: 'flex-end'
     },
     icon: {
         width: 50,
