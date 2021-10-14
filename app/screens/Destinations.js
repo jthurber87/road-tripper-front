@@ -3,23 +3,23 @@ import { ImageBackground, StyleSheet, View, Text, ScrollView, SafeAreaView} from
 import NavContainer from '../components/NavContainer';
 import colors from '../config/colors';
 
-function Destinations({route, navigation}) {
-    const { oneTrip } = route.params
+function Destinations({oneTrip, navigation}) {
+
     return (
         <ImageBackground 
         style={styles.background}
         resizeMode='cover'
         source={require('../assets/map-background.jpeg')}
         >
-            <Text style={styles.text}>Destinations: </Text>
+            {/* <Text style={styles.text}>Destinations: </Text> */}
                 {/* <ScrollView style={styles.scrollView}> */}
             {
-                oneTrip && oneTrip.destinations.map(destination => (
+                oneTrip && oneTrip.route.params.oneTrip.destinations.map(destination => (
                     <Text key={destination._id} style={styles.text}>{destination.name}</Text>
                 ))
             } 
                 {/* </ScrollView> */}
-            <NavContainer navigation={navigation}/>
+            {/* <NavContainer navigation={navigation}/>  */}
         </ImageBackground>
     );
 }

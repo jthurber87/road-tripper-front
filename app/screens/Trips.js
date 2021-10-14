@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { ImageBackground, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
 import NavContainer from '../components/NavContainer.js';
 import colors from '../config/colors.js';
 
@@ -18,7 +18,7 @@ function Trips({navigation}) {
     const selectTrip = async(id) => {
         const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
         const parsedTrip = await foundTrip.json()
-        navigation.navigate("Destinations", {
+        navigation.navigate("MainScreen", {
             oneTrip: parsedTrip
         })
     }
@@ -55,7 +55,12 @@ function Trips({navigation}) {
                 </TouchableOpacity>
                 ))
             } 
-
+            {/* <TextInput
+                style={styles.input}
+                onChangeText={onChangeUsername}
+                value={username}
+                placeholder="Username"
+                /> */}
         </ImageBackground>
     );
 }

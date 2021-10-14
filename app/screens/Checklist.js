@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { ImageBackground, StyleSheet, View} from 'react-native';
+import { FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import NavContainer from '../components/NavContainer.js';
 
 function Checklist({navigation}) {
@@ -10,7 +10,9 @@ function Checklist({navigation}) {
         resizeMode='cover'
         source={require('../assets/checklist-background.jpeg')}
         >
-        <NavContainer navigation={navigation}/>
+            <FlatList>
+                
+            </FlatList>
         </ImageBackground>
     );
 }
@@ -18,7 +20,7 @@ function Checklist({navigation}) {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     },
     text: {

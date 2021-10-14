@@ -8,6 +8,7 @@ import Trips from './app/screens/Trips';
 import Destinations from './app/screens/Destinations';
 import ImageSelect from './app/screens/ImageSelect';
 import Checklist from './app/screens/Checklist';
+import MainScreen from './app/screens/MainScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
           <Stack.Screen name="Destinations" component={Destinations} /*options={{headerShown: false}}*/ />
           <Stack.Screen name="Checklist" component={Checklist} /*options={{headerShown: false}}*/ />
           <Stack.Screen name="Images" component={ImageSelect} /*options={{headerShown: false}}*/ />
+          <Stack.Screen name="MainScreen" component={MainScreen} /*options={{headerShown: false}}*/ />
         </Stack.Navigator>
       </NavigationContainer>
   );

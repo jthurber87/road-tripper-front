@@ -37,11 +37,11 @@ export default function ImageSelect({navigation}) {
         <SafeAreaView />
         <View onPress={PickImage} style={styles.inputContainer}>
             <TouchableOpacity onPress={PickImage}>
-                <Image source={require('../assets/camera.png')} style={{width: 100, height: 100}}/>
+                <Text>Add Image</Text>
             </TouchableOpacity>
         </View>
         {image && <Image source={{uri:image}} style={{width: 200, height: 200}}/>}
-        <NavContainer navigation={navigation}/>
+        {/* <NavContainer navigation={navigation}/> */}
         </ImageBackground>
     );
 }
