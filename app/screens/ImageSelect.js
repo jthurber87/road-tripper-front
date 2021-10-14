@@ -35,9 +35,9 @@ export default function ImageSelect({navigation}) {
         source={require('../assets/images-background.jpg')}
         >
         <SafeAreaView />
-        <View onPress={PickImage} style={styles.inputContainer}>
+        <View onPress={PickImage} style={styles.box}>
             <TouchableOpacity onPress={PickImage}>
-                <Text>Add Image</Text>
+                <Text style={styles.text}>Add Image</Text>
             </TouchableOpacity>
         </View>
         {image && <Image source={{uri:image}} style={{width: 200, height: 200}}/>}
@@ -47,16 +47,32 @@ export default function ImageSelect({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    background: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      alignItems: 'center'
-    },
-    inputContainer: {
-      backgroundColor: colors.container,
-      margin: 20,
-      padding: 10,
-      bottom: 500,
-      borderRadius: 20
-    },
+  background: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  box: {
+      borderRadius: 10,
+      height: 40,
+      width: '30%',
+      backgroundColor: colors.primary,
+      margin: 5,
+      top: 20,
+      paddingLeft: 10
+  },
+  text: {
+      color: colors.secondary,
+      fontSize: 20,
+      paddingTop: 8
+  },
+  inputBox: {
+      borderRadius: 10,
+      height: 40,
+      width: '95%',
+      backgroundColor: colors.secondary,
+      margin: 5,
+      top: 20,
+      paddingLeft: 10
+  }
 })

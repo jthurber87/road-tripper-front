@@ -23,15 +23,12 @@ function Trips({navigation}) {
         })
     }
 
-    const deleteTrip = async (id) => {
-        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id, {
-                    method: 'DELETE',
-                })}
-
     const confirmDelete = async (id) => {
+        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
+        const parsedTrip = await foundTrip.json()
         Alert.alert(
-            "Delete",
-            "Are you sure you want to delete?",
+            `Delete ${parsedTrip.name}?`,
+            "",
             [
                 {
                     text: "Cancel",
@@ -40,7 +37,9 @@ function Trips({navigation}) {
                 },
                 { 
                     text: "Delete", onPress: () => {
-                    deleteTrip(id)
+                    foundTrip, {
+                    method: 'DELETE',
+                }
                     }
                 }
             ]
@@ -58,11 +57,10 @@ function Trips({navigation}) {
         resizeMode='cover'
         source={require('../assets/trips-background.jpeg')}
         >
-            <Text style={styles.text}>Trips: </Text>
             {
                 trips && trips.map(trip => (
                 <TouchableOpacity
-                    style={styles.tripBox}
+                    style={styles.box}
                     trip={trip}
                     key={trip._id}
                     onPress={()=>selectTrip(trip._id)}
@@ -73,12 +71,7 @@ function Trips({navigation}) {
                 </TouchableOpacity>
                 ))
             }
-            {/* <TextInput
-                style={styles.input}
-                onChangeText={onChangeUsername}
-                value={username}
-                placeholder="Username"
-                /> */}
+                <TextInput style={styles.inputBox} placeholder="Add a trip"/>
         </ImageBackground>
     );
 }
@@ -89,24 +82,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
-    text: {
-        fontSize: 25,
-        textAlign: 'center',
-        paddingBottom: 10,
-        top: 10,
-        color: colors.secondary
-    },
-    tripBox: {
+    box: {
         borderRadius: 10,
         height: 40,
         width: '95%',
-        backgroundColor: colors.container,
+        backgroundColor: colors.primary,
         margin: 5,
-        top: 20
+        top: 20,
+        paddingLeft: 10
     },
     containerText: {
+        color: colors.secondary,
         fontSize: 20,
-        padding: 10
+        paddingTop: 8
+    },
+    inputBox: {
+        borderRadius: 10,
+        height: 40,
+        width: '95%',
+        backgroundColor: colors.secondary,
+        margin: 5,
+        top: 20,
+        paddingLeft: 10
     }
 })
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { ImageBackground, StyleSheet, View, Text, ScrollView, SafeAreaView} from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, TextInput} from 'react-native';
 import NavContainer from '../components/NavContainer';
 import colors from '../config/colors';
 
@@ -7,6 +7,7 @@ import colors from '../config/colors';
 
 function Destinations({oneTrip}) {
 
+    // function addDestination = ()
     return (
         <ImageBackground 
         style={styles.background}
@@ -24,8 +25,8 @@ function Destinations({oneTrip}) {
             } 
                 {/* </ScrollView> */}
             {/* <NavContainer navigation={navigation}/>  */}
-            <View style={styles.box}><Text style={styles.text}>Add a destination</Text></View>
-        </ImageBackground>
+            <TextInput style={styles.inputBox} onSubmit={console.log("Submitted")} placeholder="Add a destination"/>        
+            </ImageBackground>
     );
 }
 
@@ -33,25 +34,29 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-start'
-    },
-    text: {
-        fontSize: 25,
-        top: 10,
-        paddingBottom: 10
-    },
-    scrollView: {
-        width: '80%',
-        padding: 10,
-        backgroundColor: colors.container
+        justifyContent: 'flex-start',
     },
     box: {
         borderRadius: 10,
         height: 40,
         width: '95%',
-        justifyContent: 'center',
-        backgroundColor: colors.container,
+        backgroundColor: colors.primary,
         margin: 5,
+        top: 20,
+        paddingLeft: 10
+    },
+    text: {
+        color: colors.secondary,
+        fontSize: 20,
+        paddingTop: 8
+    },
+    inputBox: {
+        borderRadius: 10,
+        height: 40,
+        width: '95%',
+        backgroundColor: colors.secondary,
+        margin: 5,
+        top: 20,
         paddingLeft: 10
     }
 })

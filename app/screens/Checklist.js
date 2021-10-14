@@ -14,8 +14,8 @@ function Checklist({oneTrip}) {
 
             {
                 oneTrip && oneTrip.route.params.oneTrip.checklist.map(checklist => (
-                    <View style={styles.box}>
-                        <Text key={checklist.id} style={styles.text}>{checklist}</Text>
+                    <View key={checklist._id} style={styles.box}>
+                        <Text key={checklist._id} style={styles.text}>{checklist}</Text>
                     </View>
                 ))
             } 
@@ -26,19 +26,30 @@ function Checklist({oneTrip}) {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-    },
-    text: {
-        fontSize: 25,
-        top: 10,
-        paddingBottom: 10
+        alignItems: 'center',
+        justifyContent: 'flex-start',
     },
     box: {
         borderRadius: 10,
         height: 40,
         width: '95%',
-        justifyContent: 'center',
-        backgroundColor: colors.container,
+        backgroundColor: colors.primary,
         margin: 5,
+        top: 20,
+        paddingLeft: 10
+    },
+    text: {
+        color: colors.secondary,
+        fontSize: 20,
+        paddingTop: 8
+    },
+    inputBox: {
+        borderRadius: 10,
+        height: 40,
+        width: '95%',
+        backgroundColor: colors.secondary,
+        margin: 5,
+        top: 20,
         paddingLeft: 10
     }
 })
