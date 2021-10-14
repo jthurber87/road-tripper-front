@@ -8,7 +8,12 @@ const TripContext = React.createContext()
 function Trips({navigation}) {
 
     const [trips, setTrips] = useState()
+    const [input, setInput] = useState({
+        name: ""
+    })
 
+    // useEffect (() => {setInput()}, [input])
+    
     const getTrips = async () => {
         const tripsResults = await fetch("http://10.0.0.89:9000/trips/");
         const parsedTrips = await tripsResults.json();
@@ -37,9 +42,10 @@ function Trips({navigation}) {
                 },
                 { 
                     text: "Delete", onPress: () => {
-                    foundTrip, {
-                    method: 'DELETE',
-                }
+                        foundTrip, {
+                        method: 'DELETE',
+                        }
+                        console.log("Working delete")
                     }
                 }
             ]
@@ -50,6 +56,21 @@ function Trips({navigation}) {
     useEffect(() => {
         getTrips();
     }, [trips]);
+
+    const newTrip = async(input) => {
+        console.log(input)
+        const trip = await fetch("http://10.0.0.89:9000/trips/", {
+            method: "POST",
+            body: JSON.stringify(input),
+            headers: {
+                "Content-Type": "application/json",
+                // "Access-Control-Allow-Origin": "*"
+            }
+        })
+    }
+    const handleChange = (e) => {
+        setInput({ ...input, [e.target.name]: e.target.value })
+    }
 
     return (
         <ImageBackground
@@ -65,13 +86,14 @@ function Trips({navigation}) {
                     key={trip._id}
                     onPress={()=>selectTrip(trip._id)}
                     onLongPress={()=>confirmDelete(trip._id)}>
-                    <Text style={styles.containerText}>
+                    <Text key={trip._id} style={styles.containerText}>
                         {trip.name}
                     </Text>
                 </TouchableOpacity>
                 ))
             }
-                <TextInput style={styles.inputBox} placeholder="Add a trip"/>
+            {/* name='spirit' id='spirit' value={input.spirit} onChange={handleChange} */}
+                <TextInput style={styles.inputBox} name='name' value={input} onChangeText={handleChange} onSubmitEditing={()=>{newTrip(input), console.log(input)}} placeholder="Add a trip"/>
         </ImageBackground>
     );
 }

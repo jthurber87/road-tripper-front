@@ -18,14 +18,14 @@ function Destinations({oneTrip}) {
                 {/* <ScrollView style={styles.scrollView}> */}
             {
                 oneTrip && oneTrip.route.params.oneTrip.destinations.map(destination => (
-                    <View style={styles.box}>
-                    <Text key={destination._id} style={styles.text}>{destination.name}</Text>
+                    <View key={destination._id} style={styles.box}>
+                        <Text key={destination._id} style={styles.text}>{destination.name}</Text>
                     </View>
                 ))
             } 
                 {/* </ScrollView> */}
             {/* <NavContainer navigation={navigation}/>  */}
-            <TextInput style={styles.inputBox} onSubmit={console.log("Submitted")} placeholder="Add a destination"/>        
+            <TextInput style={styles.inputBox} onSubmitEditing= {()=>console.log("Submitted")} placeholder="Add a destination"/>        
             </ImageBackground>
     );
 }

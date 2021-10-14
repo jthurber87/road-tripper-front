@@ -34,13 +34,13 @@ export default function ImageSelect({navigation}) {
         resizeMode='cover'
         source={require('../assets/images-background.jpg')}
         >
-        <SafeAreaView />
+
+        {image && <Image source={{uri:image}} style={{width: 200, height: 200}}/>}
         <View onPress={PickImage} style={styles.box}>
             <TouchableOpacity onPress={PickImage}>
                 <Text style={styles.text}>Add Image</Text>
             </TouchableOpacity>
         </View>
-        {image && <Image source={{uri:image}} style={{width: 200, height: 200}}/>}
         {/* <NavContainer navigation={navigation}/> */}
         </ImageBackground>
     );

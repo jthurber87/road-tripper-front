@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, TextInput} from 'react-native';
 import NavContainer from '../components/NavContainer.js';
 import colors from '../config/colors.js';
 
 function Checklist({oneTrip}) {
-   
+    const onEdit = ()=>console.log("Yep")
     return (
         <ImageBackground 
         style={styles.background}
@@ -19,6 +19,7 @@ function Checklist({oneTrip}) {
                     </View>
                 ))
             } 
+            <TextInput style={styles.inputBox} onSubmitEditing= {()=>{onEdit()}} placeholder="Add item"/>        
         </ImageBackground>
     );
 }

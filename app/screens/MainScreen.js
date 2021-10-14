@@ -1,4 +1,5 @@
 import React from 'react'
+import { Image } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Destinations from './Destinations';
 import Checklist from './Checklist';
@@ -11,9 +12,51 @@ export default function MainScreen (oneTrip) {
 
   return (
     <Tab.Navigator initialRouteName="Destinations">
-      <Tab.Screen name="Destinations" children={()=><Destinations oneTrip={oneTrip}/>}/>
-      <Tab.Screen name="Checklist" children={()=><Checklist oneTrip={oneTrip}/>}/>
-      <Tab.Screen name="Images" children={()=><ImageSelect oneTrip={oneTrip}/>}/>
+      <Tab.Screen
+          name="Destinations"
+          children={()=><Destinations oneTrip={oneTrip}/>}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image
+                source={require('../assets/map.png')}
+                style={{
+                  width: size,
+                  height: size,
+                }}
+              />
+            ),
+          }}
+        />
+      <Tab.Screen
+          name="Checklist"
+          children={()=><Checklist oneTrip={oneTrip}/>}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image
+                source={require('../assets/list.png')}
+                style={{
+                  width: size,
+                  height: size,
+                }}
+              />
+            ),
+          }}
+        />
+      <Tab.Screen
+          name="ImageSelect"
+          children={()=><ImageSelect oneTrip={oneTrip}/>}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image
+                source={require('../assets/camera.png')}
+                style={{
+                  width: size,
+                  height: size,
+                }}
+              />
+            ),
+          }}
+        />
     </Tab.Navigator>
   );
 }
