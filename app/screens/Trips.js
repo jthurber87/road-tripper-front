@@ -11,8 +11,6 @@ function Trips({navigation}) {
     const [input, setInput] = useState({
         name: ""
     })
-
-    // useEffect (() => {setInput()}, [input])
     
     const getTrips = async () => {
         const tripsResults = await fetch("http://10.0.0.89:9000/trips/");
@@ -43,9 +41,9 @@ function Trips({navigation}) {
                 { 
                     text: "Delete", onPress: () => {
                         foundTrip, {
-                        method: 'DELETE',
+                        method: 'DELETE'
                         }
-                        console.log("Working delete")
+                        console.log(JSON.pretty(foundTrip))
                     }
                 }
             ]
@@ -67,9 +65,6 @@ function Trips({navigation}) {
                 // "Access-Control-Allow-Origin": "*"
             }
         })
-    }
-    const handleChange = (e) => {
-        setInput({ ...input, [e.target.name]: e.target.value })
     }
 
     return (
@@ -93,7 +88,7 @@ function Trips({navigation}) {
                 ))
             }
             {/* name='spirit' id='spirit' value={input.spirit} onChange={handleChange} */}
-                <TextInput style={styles.inputBox} name='name' value={input} onChangeText={handleChange} onSubmitEditing={()=>{newTrip(input), console.log(input)}} placeholder="Add a trip"/>
+                <TextInput style={styles.inputBox} onChangeText={text=>{setInput({ ...input, ["name"]:text})}} onSubmitEditing={()=>{newTrip(input)}} placeholder="Add a trip"/>
         </ImageBackground>
     );
 }
