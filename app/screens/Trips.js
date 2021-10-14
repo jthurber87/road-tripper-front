@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, TextInput} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, TextInput, Alert} from 'react-native';
 import NavContainer from '../components/NavContainer.js';
 import colors from '../config/colors.js';
 
 const TripContext = React.createContext()
 
 function Trips({navigation}) {
-    
+
     const [trips, setTrips] = useState()
 
     const getTrips = async () => {
@@ -14,7 +14,7 @@ function Trips({navigation}) {
         const parsedTrips = await tripsResults.json();
         setTrips(parsedTrips);
       }
-      
+
     const selectTrip = async(id) => {
         const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
         const parsedTrip = await foundTrip.json()
@@ -23,19 +23,37 @@ function Trips({navigation}) {
         })
     }
 
-
     const deleteTrip = async (id) => {
-        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
-        const parsedTrip = await foundTrip.json()
-        console.log(parsedTrip)
+        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id, {
+                    method: 'DELETE',
+                })}
+
+    const confirmDelete = async (id) => {
+        Alert.alert(
+            "Delete",
+            "Are you sure you want to delete?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { 
+                    text: "Delete", onPress: () => {
+                    deleteTrip(id)
+                    }
+                }
+            ]
+        )
     }
+                
 
     useEffect(() => {
         getTrips();
     }, [trips]);
 
     return (
-        <ImageBackground 
+        <ImageBackground
         style={styles.background}
         resizeMode='cover'
         source={require('../assets/trips-background.jpeg')}
@@ -43,18 +61,18 @@ function Trips({navigation}) {
             <Text style={styles.text}>Trips: </Text>
             {
                 trips && trips.map(trip => (
-                <TouchableOpacity 
-                    style={styles.tripBox} 
-                    trip={trip} 
+                <TouchableOpacity
+                    style={styles.tripBox}
+                    trip={trip}
                     key={trip._id}
                     onPress={()=>selectTrip(trip._id)}
-                    onLongPress={()=>deleteTrip(trip._id)}>
+                    onLongPress={()=>confirmDelete(trip._id)}>
                     <Text style={styles.containerText}>
                         {trip.name}
                     </Text>
                 </TouchableOpacity>
                 ))
-            } 
+            }
             {/* <TextInput
                 style={styles.input}
                 onChangeText={onChangeUsername}
@@ -87,8 +105,8 @@ const styles = StyleSheet.create({
         top: 20
     },
     containerText: {
-        fontSize: 20, 
-        padding: 10  
+        fontSize: 20,
+        padding: 10
     }
 })
 

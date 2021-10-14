@@ -12,8 +12,8 @@ export default function MainScreen (oneTrip) {
   return (
     <Tab.Navigator initialRouteName="Destinations">
       <Tab.Screen name="Destinations" children={()=><Destinations oneTrip={oneTrip}/>}/>
-      <Tab.Screen name="Checklist" component={Checklist} oneTrip={oneTrip}/>
-      <Tab.Screen name="Images" component={ImageSelect} oneTrip={oneTrip}/>
+      <Tab.Screen name="Checklist" children={()=><Checklist oneTrip={oneTrip}/>}/>
+      <Tab.Screen name="Images" children={()=><ImageSelect oneTrip={oneTrip}/>}/>
     </Tab.Navigator>
   );
 }

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import NavContainer from '../components/NavContainer.js';
+import colors from '../config/colors.js';
 
-function Checklist({navigation}) {
+function Checklist({oneTrip}) {
    
     return (
         <ImageBackground 
@@ -10,9 +11,14 @@ function Checklist({navigation}) {
         resizeMode='cover'
         source={require('../assets/checklist-background.jpeg')}
         >
-            <FlatList>
-                
-            </FlatList>
+
+            {
+                oneTrip && oneTrip.route.params.oneTrip.checklist.map(checklist => (
+                    <View style={styles.box}>
+                        <Text key={checklist.id} style={styles.text}>{checklist}</Text>
+                    </View>
+                ))
+            } 
         </ImageBackground>
     );
 }
@@ -20,13 +26,20 @@ function Checklist({navigation}) {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center'
     },
     text: {
         fontSize: 25,
-        textAlign: 'center',
-        top: 20
+        top: 10,
+        paddingBottom: 10
+    },
+    box: {
+        borderRadius: 10,
+        height: 40,
+        width: '95%',
+        justifyContent: 'center',
+        backgroundColor: colors.container,
+        margin: 5,
+        paddingLeft: 10
     }
 })
 
