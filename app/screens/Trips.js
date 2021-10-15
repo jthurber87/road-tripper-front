@@ -39,13 +39,12 @@ function Trips({navigation}) {
                     style: "cancel"
                 },
                 { 
-                    text: "Delete", onPress: () => {
-                        foundTrip, {
-                        method: 'DELETE'
-                        }
-                        console.log(JSON.pretty(foundTrip))
+                    text: "Delete", onPress: async() => {
+                        const deleteTrip = await fetch("http://10.0.0.89:9000/trips/" + id, {
+                        method: 'DELETE',
+                    })}
                     }
-                }
+                
             ]
         )
     }
