@@ -4,7 +4,8 @@ import NavContainer from '../components/NavContainer.js';
 import colors from '../config/colors.js';
 
 function Checklist({oneTrip}) {
-    const onEdit = ()=>console.log("Yep")
+    const foundChecklist = oneTrip.route.params.oneTrip.checklist
+
     return (
         <ImageBackground 
         style={styles.background}
@@ -13,7 +14,7 @@ function Checklist({oneTrip}) {
         >
 
             {
-                oneTrip && oneTrip.route.params.oneTrip.checklist.map(checklist => (
+                oneTrip && foundChecklist.map(checklist => (
                     <View key={checklist._id} style={styles.box}>
                         <Text key={checklist._id} onLongPress={()=>console.log("Delete")} style={styles.text}>
                         {checklist}
@@ -44,7 +45,9 @@ const styles = StyleSheet.create({
     text: {
         color: colors.secondary,
         fontSize: 20,
-        paddingTop: 8
+        paddingTop: 8,
+        fontFamily: 'Chalkduster'
+
     },
     inputBox: {
         borderRadius: 10,

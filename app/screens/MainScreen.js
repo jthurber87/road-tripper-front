@@ -22,7 +22,7 @@ export default function MainScreen (oneTrip) {
                 source={require('../assets/map.png')}
                 style={{
                   width: size,
-                  height: size,
+                  height: size
                 }}
               />
             ),

@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
     containerText: {
         color: colors.secondary,
         fontSize: 20,
-        paddingTop: 8
+        paddingTop: 8,
+        fontFamily: 'Chalkduster'
     },
     inputBox: {
         borderRadius: 10,
