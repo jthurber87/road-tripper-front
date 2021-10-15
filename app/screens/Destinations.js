@@ -1,19 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
-import { fontFamily, paddingLeft, style } from 'styled-system';
-import NavContainer from '../components/NavContainer';
 import colors from '../config/colors';
 
-
-
 function Destinations({oneTrip}) {
+
     const foundDestinations = oneTrip.route.params.oneTrip.destinations
-    const [input, setInput] = useState({
+    
+    const [destInput, setDestInput] = useState({
         destinations: ""
+    })
+    const [todoInput, setTodoInput] = useState({
+        todo: ""
     })
 
     const newDestination = async(input) => {
-        const trip = await fetch("https://roadtripper-back.herokuapp.com/trips/"+id, {
+        console.log(input)
+        await fetch("https://roadtripper-back.herokuapp.com/trips/" + oneTrip.id, {
+            method: "PUT",
+            body: JSON.stringify(input),
+            headers: {
+                "Content-Type": "application/json",
+                // "Access-Control-Allow-Origin": "*"
+            }
+        })
+    }
+
+    const newTodo = async(input) => {
+        console.log(input)
+        await fetch("https://roadtripper-back.herokuapp.com/trips/" + oneTrip.id, {
             method: "PUT",
             body: JSON.stringify(input),
             headers: {
@@ -29,6 +43,7 @@ function Destinations({oneTrip}) {
         resizeMode='cover'
         source={require('../assets/map-background.jpeg')}
         >
+        <SafeAreaView />
         <ScrollView style={styles.scrollBox}>
             {
                 foundDestinations && foundDestinations.map(destination => (
@@ -49,11 +64,11 @@ function Destinations({oneTrip}) {
 
                             ))
                         }
-                        <TextInput style={styles.todo} autoCorrect={false} onChangeText={text=>{setInput({ ...input, ["destinations"]:text})}} onSubmitEditing={()=>{newDestination(input)}} placeholder="Add Todo"/> 
+                        <TextInput style={styles.todo} autoCorrect={false} onChangeText={text=>{setTodoInput({ ...todoInput, ["todo"]:text})}} onSubmitEditing={()=>{newTodo(todoInput)}} placeholder="Add Todo"/> 
                     </>
                 ))
             }
-            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setInput({ ...input, ["destinations"]:text})}} onSubmitEditing={()=>{newDestination(input)}} placeholder="Add a Destination"/> 
+            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setDestInput({ ...destInput, ["destinations"]:text})}} onSubmitEditing={()=>{newDestination(destInput)}} placeholder="Add a Destination"/> 
         </ScrollView>
                 
             </ImageBackground>
@@ -89,13 +104,11 @@ const styles = StyleSheet.create({
         color: colors.secondary,
         fontSize: 20,
         paddingTop: 8,
-        fontFamily: 'Chalkduster'
     },
     todoText: {
         color: colors.primary,
         fontSize: 15,
         paddingTop: 5,
-        fontFamily: 'Chalkduster'
     },
     inputBox: {
         borderRadius: 10,
@@ -115,56 +128,3 @@ const styles = StyleSheet.create({
 })
 
 export default Destinations;
-
-
-
-// import React, { Component } from 'react'; 
-// import { Text, View, StyleSheet, LayoutAnimation, Platform, UIManager, TouchableOpacity } from 'react-native';
- 
-// export default class App extends Component { 
-//     constructor() { 
-//         super(); 
-//         this.state = { expanded: false }
-//         if (Platform.OS === 'android' { 
-//             UIManager.setLayoutAnimationEnabledExperimental(true); 
-//         } 
-//     } 
-
-//     changeLayout = () => { LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); this.setState({ expanded: !this.state.expanded }); } 
-//     render() { 
-//         return ( 
-//             <View style={styles.container}> 
-//                 <View style={styles.btnTextHolder}> 
-//                     <TouchableOpacity activeOpacity={0.8} onPress={this.changeLayout} style={styles.Btn}> 
-//                         <Text style={styles.btnText}>
-//                             Expand / Collapse
-//                         </Text> 
-//                     </TouchableOpacity> 
-//                     <View style={{ height: this.state.expanded ? null : 0, overflow: 'hidden' }}> 
-//                         <Text style={styles.text}> 
-//                             Lorem Ipsum 
-//                         </Text> 
-//                     </View> 
-//                 </View> 
-//             </View> )
-//             ; 
-// } } 
-
-// const styles = StyleSheet.create({ 
-//     container: { 
-//         flex: 1, paddingHorizontal: 10, justifyContent: 'center', paddingTop: (Platform.OS === 'ios') ? 20 : 0 
-//     }, 
-//     text: { 
-//         fontSize: 17, color: 'black', padding: 10 
-//     }, 
-//     btnText: { 
-//         textAlign: 'center', color: 'white', fontSize: 20 
-//     }, 
-//     btnTextHolder: { 
-//         borderWidth: 1, borderColor: 'rgba(0,0,0,0.5)' 
-//     }, 
-//     Btn: { 
-//         padding: 10, backgroundColor: 'rgba(0,0,0,0.5)' 
-//     } 
-// });
-

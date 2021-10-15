@@ -23,7 +23,7 @@ function WelcomeScreen({navigation}) {
             </TouchableOpacity>
         <SafeAreaView>
             <View onPress={onLoginPress} style={styles.loginButton}>
-                <Text onPress={onLoginPress} style={styles.loginText}>Log In</Text>
+                <Text onPress={onLoginPress} style={styles.loginText}>Start your journey</Text>
             </View>
             <View onPress={onRegisterPress} style={styles.registerButton}>
                 <Text onPress={onRegisterPress} style={styles.registerText}>Register</Text>

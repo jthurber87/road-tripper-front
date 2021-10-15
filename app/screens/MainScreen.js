@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Destinations from './Destinations';
 import Checklist from './Checklist';
 import ImageSelect from './ImageSelect';
+import Trips from './Trips';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,7 @@ export default function MainScreen (oneTrip) {
                 }}
               />
             ),
+            headerShown: false
           }}
         />
       <Tab.Screen
@@ -42,10 +44,11 @@ export default function MainScreen (oneTrip) {
                 }}
               />
             ),
+            headerShown: false
           }}
         />
       <Tab.Screen
-          name="ImageSelect"
+          name="Images"
           children={()=><ImageSelect oneTrip={oneTrip}/>}
           screenOptions={{unmountOnBlur: false}}
           options={{
@@ -58,6 +61,8 @@ export default function MainScreen (oneTrip) {
                 }}
               />
             ),
+            headerShown: false
+
           }}
         />
     </Tab.Navigator>

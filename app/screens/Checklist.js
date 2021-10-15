@@ -1,28 +1,31 @@
 import React, {useState, useEffect} from 'react';
-import { ImageBackground, StyleSheet, Text, View, TextInput} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, TextInput, SafeAreaView } from 'react-native';
 import NavContainer from '../components/NavContainer.js';
 import colors from '../config/colors.js';
 
 function Checklist({oneTrip}) {
     const foundChecklist = oneTrip.route.params.oneTrip.checklist
-
     return (
         <ImageBackground 
         style={styles.background}
         resizeMode='cover'
         source={require('../assets/checklist-background.jpeg')}
         >
-
+        <SafeAreaView />
+        
+        <View key={oneTrip._id} style={styles.box}>
+            <Text key={oneTrip._id} style={styles.text}>Checklist for {oneTrip.route.params.oneTrip.name}</Text>
+        </View>
             {
                 oneTrip && foundChecklist.map(checklist => (
-                    <View key={checklist._id} style={styles.box}>
-                        <Text key={checklist._id} onLongPress={()=>console.log("Delete")} style={styles.text}>
+                    <View key={checklist._id} style={styles.todo}>
+                        <Text key={checklist._id} onLongPress={()=>console.log("Delete")} style={styles.todoText}>
                         {checklist}
-                    </Text>
+                        </Text>
                     </View>
                 ))
             } 
-            <TextInput style={styles.inputBox} onSubmitEditing= {()=>{onEdit()}} placeholder="Add item"/>        
+            <TextInput style={styles.todo} onSubmitEditing= {()=>{onEdit()}} placeholder="Add item"/>        
         </ImageBackground>
     );
 }
@@ -46,8 +49,21 @@ const styles = StyleSheet.create({
         color: colors.secondary,
         fontSize: 20,
         paddingTop: 8,
-        fontFamily: 'Chalkduster'
-
+    },
+    todo: {
+        borderRadius: 10,
+        height: 30,
+        width: '90%',
+        backgroundColor: colors.secondary,
+        // marginLeft: 15,
+        marginTop: 5, 
+        top: 15,
+        paddingLeft: 10
+    },
+    todoText: {
+        color: colors.primary,
+        fontSize: 15,
+        paddingTop: 5,
     },
     inputBox: {
         borderRadius: 10,
@@ -57,7 +73,7 @@ const styles = StyleSheet.create({
         margin: 5,
         top: 20,
         paddingLeft: 10
-    }
+    },
 })
 
 export default Checklist;

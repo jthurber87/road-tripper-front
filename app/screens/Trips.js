@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, TextInput, Alert} from 'react-native';
-import NavContainer from '../components/NavContainer.js';
+// import NavContainer from '../components/NavContainer.js';
 import colors from '../config/colors.js';
 
-const TripContext = React.createContext()
 
 function Trips({navigation}) {
 
@@ -11,14 +10,14 @@ function Trips({navigation}) {
     const [input, setInput] = useState({
         name: ""
     })
-    
+
     const getTrips = async () => {
         const tripsResults = await fetch("https://roadtripper-back.herokuapp.com/trips/");
         const parsedTrips = await tripsResults.json();
         setTrips(parsedTrips);
       }
 
-    const selectTrip = async(id) => {
+    const selectTrip = async (id) => {
         const foundTrip = await fetch("https://roadtripper-back.herokuapp.com/trips/" + id)
         const parsedTrip = await foundTrip.json()
         navigation.navigate("MainScreen", {
@@ -55,13 +54,11 @@ function Trips({navigation}) {
     }, [trips]);
 
     const newTrip = async(input) => {
-        console.log(input)
-        const trip = await fetch("https://roadtripper-back.herokuapp.com/trips/", {
+        await fetch("https://roadtripper-back.herokuapp.com/trips/", {
             method: "POST",
             body: JSON.stringify(input),
             headers: {
                 "Content-Type": "application/json",
-                // "Access-Control-Allow-Origin": "*"
             }
         })
     }
@@ -86,7 +83,6 @@ function Trips({navigation}) {
                 </TouchableOpacity>
                 ))
             }
-            {/* name='spirit' id='spirit' value={input.spirit} onChange={handleChange} */}
                 <TextInput style={styles.inputBox} onChangeText={text=>{setInput({ ...input, ["name"]:text})}} onSubmitEditing={()=>{newTrip(input)}} placeholder="Add a trip"/>
         </ImageBackground>
     );
@@ -111,7 +107,6 @@ const styles = StyleSheet.create({
         color: colors.secondary,
         fontSize: 20,
         paddingTop: 8,
-        fontFamily: 'Chalkduster'
     },
     inputBox: {
         borderRadius: 10,

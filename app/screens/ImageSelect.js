@@ -6,7 +6,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import NavContainer from '../components/NavContainer.js';
 
 
-
 export default function ImageSelect() {
     const [image, setImage] = useState(null)
     useEffect(() => {
@@ -22,7 +21,6 @@ export default function ImageSelect() {
         aspect: [4,3], 
         quality: 1
       })
-      console.log(result)
       if (!result.cancelled) {
         setImage(result.uri) 
       }
@@ -34,14 +32,13 @@ export default function ImageSelect() {
         resizeMode='cover'
         source={require('../assets/images-background.jpg')}
         >
-
+        <SafeAreaView />
         {image && <Image source={{uri:image}} style={{width: 200, height: 200}}/>}
         <View onPress={PickImage} style={styles.box}>
             <TouchableOpacity onPress={PickImage}>
                 <Text style={styles.text}>Add Image</Text>
             </TouchableOpacity>
         </View>
-        {/* <NavContainer navigation={navigation}/> */}
         </ImageBackground>
     );
 }
