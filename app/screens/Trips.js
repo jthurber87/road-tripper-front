@@ -13,13 +13,13 @@ function Trips({navigation}) {
     })
     
     const getTrips = async () => {
-        const tripsResults = await fetch("http://10.0.0.89:9000/trips/");
+        const tripsResults = await fetch("https://roadtripper-back.herokuapp.com/trips/");
         const parsedTrips = await tripsResults.json();
         setTrips(parsedTrips);
       }
 
     const selectTrip = async(id) => {
-        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
+        const foundTrip = await fetch("https://roadtripper-back.herokuapp.com/trips/" + id)
         const parsedTrip = await foundTrip.json()
         navigation.navigate("MainScreen", {
             oneTrip: parsedTrip
@@ -27,7 +27,7 @@ function Trips({navigation}) {
     }
 
     const confirmDelete = async (id) => {
-        const foundTrip = await fetch("http://10.0.0.89:9000/trips/" + id)
+        const foundTrip = await fetch("https://roadtripper-back.herokuapp.com/trips/" + id)
         const parsedTrip = await foundTrip.json()
         Alert.alert(
             `Delete ${parsedTrip.name}?`,
@@ -40,7 +40,7 @@ function Trips({navigation}) {
                 },
                 { 
                     text: "Delete", onPress: async() => {
-                        const deleteTrip = await fetch("http://10.0.0.89:9000/trips/" + id, {
+                        const deleteTrip = await fetch("https://roadtripper-back.herokuapp.com/trips/" + id, {
                         method: 'DELETE',
                     })}
                     }
@@ -56,7 +56,7 @@ function Trips({navigation}) {
 
     const newTrip = async(input) => {
         console.log(input)
-        const trip = await fetch("http://10.0.0.89:9000/trips/", {
+        const trip = await fetch("https://roadtripper-back.herokuapp.com/trips/", {
             method: "POST",
             body: JSON.stringify(input),
             headers: {

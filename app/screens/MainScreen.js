@@ -15,6 +15,7 @@ export default function MainScreen (oneTrip) {
       <Tab.Screen
           name="Destinations"
           children={()=><Destinations oneTrip={oneTrip}/>}
+          screenOptions={{unmountOnBlur: false}}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
@@ -30,6 +31,7 @@ export default function MainScreen (oneTrip) {
       <Tab.Screen
           name="Checklist"
           children={()=><Checklist oneTrip={oneTrip}/>}
+          screenOptions={{unmountOnBlur: false}}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image
@@ -45,6 +47,7 @@ export default function MainScreen (oneTrip) {
       <Tab.Screen
           name="ImageSelect"
           children={()=><ImageSelect oneTrip={oneTrip}/>}
+          screenOptions={{unmountOnBlur: false}}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Image

@@ -7,7 +7,7 @@ import NavContainer from '../components/NavContainer.js';
 
 
 
-export default function ImageSelect({navigation}) {
+export default function ImageSelect() {
     const [image, setImage] = useState(null)
     useEffect(() => {
       if (Platform.OS !== 'web') {

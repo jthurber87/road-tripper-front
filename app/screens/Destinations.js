@@ -1,31 +1,47 @@
 import React, {useState, useEffect} from 'react';
-import { ImageBackground, StyleSheet, View, Text, TextInput} from 'react-native';
+import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
 import NavContainer from '../components/NavContainer';
 import colors from '../config/colors';
 
 
 
 function Destinations({oneTrip}) {
+    const foundDestinations = oneTrip.route.params.oneTrip.destinations
+    const [input, setInput] = useState({
+        destinations: ""
+    })
 
-    // function addDestination = ()
+    const newDestination = async(input) => {
+        const trip = await fetch("https://roadtripper-back.herokuapp.com/trips/"+id, {
+            method: "PUT",
+            body: JSON.stringify(input),
+            headers: {
+                "Content-Type": "application/json",
+                // "Access-Control-Allow-Origin": "*"
+            }
+        })
+    }
+
     return (
         <ImageBackground 
         style={styles.background}
         resizeMode='cover'
         source={require('../assets/map-background.jpeg')}
         >
-            {/* <Text style={styles.text}>Destinations: </Text> */}
-                {/* <ScrollView style={styles.scrollView}> */}
             {
-                oneTrip && oneTrip.route.params.oneTrip.destinations.map(destination => (
-                    <View key={destination._id} style={styles.box}>
-                        <Text key={destination._id} style={styles.text}>{destination.name}</Text>
-                    </View>
+                oneTrip && foundDestinations.map(destination => (
+                    <TouchableOpacity
+                    style={styles.box}
+                    key={destination._id}
+                    >
+                    <Text key={destination._id} onLongPress={()=>console.log("Delete")} style={styles.text}>
+                        {destination.name}
+                    </Text>
+                </TouchableOpacity>
                 ))
             } 
-                {/* </ScrollView> */}
-            {/* <NavContainer navigation={navigation}/>  */}
-            <TextInput style={styles.inputBox} onSubmitEditing= {()=>console.log("Submitted")} placeholder="Add a destination"/>        
+                
+            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setInput({ ...input, ["destinations"]:text})}} onSubmitEditing={()=>{newDestination(input)}} placeholder="Add a Destination"/> 
             </ImageBackground>
     );
 }

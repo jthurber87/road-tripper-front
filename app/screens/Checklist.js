@@ -15,7 +15,9 @@ function Checklist({oneTrip}) {
             {
                 oneTrip && oneTrip.route.params.oneTrip.checklist.map(checklist => (
                     <View key={checklist._id} style={styles.box}>
-                        <Text key={checklist._id} style={styles.text}>{checklist}</Text>
+                        <Text key={checklist._id} onLongPress={()=>console.log("Delete")} style={styles.text}>
+                        {checklist}
+                    </Text>
                     </View>
                 ))
             } 
