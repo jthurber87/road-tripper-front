@@ -73,7 +73,7 @@ function Trips({navigation}) {
                 trips && trips.map(trip => (
                 <TouchableOpacity
                     style={styles.box}
-                    trip={trip}
+                    // trip={trip}
                     key={trip._id}
                     onPress={()=>selectTrip(trip._id)}
                     onLongPress={()=>confirmDelete(trip._id)}>

@@ -4,18 +4,27 @@ import colors from '../config/colors';
 
 function Destinations({oneTrip}) {
 
+    const oneTripId = oneTrip.route.params.oneTrip._id
     const foundDestinations = oneTrip.route.params.oneTrip.destinations
     
+    const [trip, setTrip] = useState()
     const [destInput, setDestInput] = useState({
-        destinations: ""
+        name: [""]
     })
     const [todoInput, setTodoInput] = useState({
         todo: ""
     })
 
-    const newDestination = async(input) => {
-        console.log(input)
-        await fetch("https://roadtripper-back.herokuapp.com/trips/" + oneTrip.id, {
+    // const getTrip = async () => {
+    //     const tripsResults = await fetch("https://roadtripper-back.herokuapp.com/trips/");
+    //     const parsedTrips = await tripsResults.json();
+    //     setTrip(parsedTrips);
+    //   }
+    const newDestination = async(id, input) => {
+        // console.log(oneTrip)
+        // console.log(foundDestinations)
+        console.log(oneTrip)
+        await fetch("https://roadtripper-back.herokuapp.com/trips/" + id, {
             method: "PUT",
             body: JSON.stringify(input),
             headers: {
@@ -25,11 +34,12 @@ function Destinations({oneTrip}) {
         })
     }
 
-    const newTodo = async(input) => {
-        console.log(input)
-        await fetch("https://roadtripper-back.herokuapp.com/trips/" + oneTrip.id, {
+    const newTodo = async(id, input) => {
+        const foundTodo = oneTrip.route.params.oneTrip.destinations.todo
+        console.log(foundTodo)
+        await fetch("https://roadtripper-back.herokuapp.com/trips/" + id, {
             method: "PUT",
-            body: JSON.stringify(input),
+            body: JSON.stringify(oneTrip, input),
             headers: {
                 "Content-Type": "application/json",
                 // "Access-Control-Allow-Origin": "*"
@@ -37,6 +47,10 @@ function Destinations({oneTrip}) {
         })
     }
 
+    // useEffect(() => {
+    //     getTrip();
+    // }, [trip]);
+    
     return (
         <ImageBackground 
         style={styles.background}
@@ -68,7 +82,7 @@ function Destinations({oneTrip}) {
                     </>
                 ))
             }
-            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setDestInput({ ...destInput, ["destinations"]:text})}} onSubmitEditing={()=>{newDestination(destInput)}} placeholder="Add a Destination"/> 
+            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setDestInput({ ...destInput, name : text})}} onSubmitEditing={()=>{newDestination(oneTripId, destInput)}} placeholder="Rename Trip"/> 
         </ScrollView>
                 
             </ImageBackground>
