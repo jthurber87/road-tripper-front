@@ -36,7 +36,6 @@ Open via simulator from XCode
 ```
 <TouchableOpacity
     style={styles.box}
-    // trip={trip}
     key={trip._id}
     onPress={()=>selectTrip(trip._id)}
     onLongPress={()=>confirmDelete(trip._id)}>
@@ -47,6 +46,78 @@ Open via simulator from XCode
 ```
 
 - Navigation can also be tricky. Screens, tabs, and nav bars are just a few things to be taken into account for naviagation. This project uses a little of all three.
+
+```
+ <NavigationContainer>
+    <Stack.Navigator>
+        <Stack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown: false}} />
+        <Stack.Screen name="Login" component={LoginScreen} /*options={{headerShown: false}}*/ />
+        <Stack.Screen name="Register" component={RegisterScreen} /*options={{headerShown: false}}*/ />
+        <Stack.Screen name="Trips" component={Trips}/*options={{headerShown: false}}*/ />
+        <Stack.Screen name="Destinations" component={Destinations} /*options={{headerShown: false}}*/ />
+        <Stack.Screen name="Checklist" component={Checklist} /*options={{headerShown: false}}*/ />
+        <Stack.Screen name="Images" component={ImageSelect} /*options={{headerShown: false}}*/ />
+        <Stack.Screen name="MainScreen" component={MainScreen} /*options={{headerShown: false}}*/ />
+    </Stack.Navigator>
+</NavigationContainer>
+```
+
+```
+ <Tab.Navigator initialRouteName="Destinations">
+      <Tab.Screen
+          name="Destinations"
+          children={()=><Destinations oneTrip={oneTrip}/>}
+          screenOptions={{unmountOnBlur: false}}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image
+                source={require('../assets/map.png')}
+                style={{
+                  width: size,
+                  height: size
+                }}
+              />
+            ),
+            headerShown: false
+          }}
+        />
+      <Tab.Screen
+          name="Checklist"
+          children={()=><Checklist oneTrip={oneTrip}/>}
+          screenOptions={{unmountOnBlur: false}}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image
+                source={require('../assets/list.png')}
+                style={{
+                  width: size,
+                  height: size,
+                }}
+              />
+            ),
+            headerShown: false
+          }}
+        />
+      <Tab.Screen
+          name="Images"
+          children={()=><ImageSelect oneTrip={oneTrip}/>}
+          screenOptions={{unmountOnBlur: false}}
+          options={{
+            tabBarIcon: ({ focused, color, size }) => (
+              <Image
+                source={require('../assets/camera.png')}
+                style={{
+                  width: size,
+                  height: size,
+                }}
+              />
+            ),
+            headerShown: false
+
+          }}
+        />
+</Tab.Navigator>
+```
 
 - Creating mobile apps with React Native is fun! Once you have the hang of it, you can see live updates on a simulated iPhone or Android device as you save.
 
