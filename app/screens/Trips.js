@@ -67,7 +67,7 @@ function Trips({navigation}) {
         <ImageBackground
         style={styles.background}
         resizeMode='cover'
-        source={require('../assets/trips-background.jpeg')}
+        source={require('../assets/bus-background.jpeg')}
         >
             {
                 trips && trips.map(trip => (

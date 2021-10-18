@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { ImageBackground, StyleSheet, Text, View, TextInput, SafeAreaView } from 'react-native';
 import NavContainer from '../components/NavContainer.js';
 import colors from '../config/colors.js';
+// import { CheckBox } from 'react-native-elements'
 
 function Checklist({oneTrip}) {
     const foundChecklist = oneTrip.route.params.oneTrip.checklist
@@ -19,7 +20,7 @@ function Checklist({oneTrip}) {
             {
                 oneTrip && foundChecklist.map(checklist => (
                     <View key={checklist._id} style={styles.todo}>
-                        <Text key={checklist._id} onLongPress={()=>console.log("Delete")} style={styles.todoText}>
+                        <Text key={checklist._id} style={styles.todoText}>
                         {checklist}
                         </Text>
                     </View>

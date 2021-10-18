@@ -30,7 +30,7 @@ export default function ImageSelect() {
         <ImageBackground 
         style={styles.background} 
         resizeMode='cover'
-        source={require('../assets/images-background.jpg')}
+        source={require('../assets/images-background-3.jpeg')}
         >
         <SafeAreaView />
         {image && <Image source={{uri:image}} style={{width: 200, height: 200}}/>}

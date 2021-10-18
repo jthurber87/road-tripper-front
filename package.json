@@ -9,6 +9,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.0",
     "@react-aria/ssr": "^3.1.0",
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.5",
@@ -26,6 +27,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-elements": "^3.4.2",
     "react-native-pager-view": "5.0.12",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
@@ -35,8 +37,7 @@
     "react-stately": "^3.9.0",
     "styled-components": "^5.3.1",
     "styled-system": "^5.1.5",
-    "undefined": "@expo/vector-icons/Ionicons",
-    "@expo/vector-icons": "^12.0.0"
+    "undefined": "@expo/vector-icons/Ionicons"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

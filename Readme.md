@@ -170,6 +170,8 @@ const [destInput, setDestInput] = useState({
 
 - Add picture associations
 
+- Search destinations with autocomplete from NPI API
+
 ## Authors
 
 - [@jthurber87](https://www.github.com/jthurber87)
