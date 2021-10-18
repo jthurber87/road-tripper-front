@@ -7,23 +7,16 @@ function Destinations({oneTrip}) {
     const oneTripId = oneTrip.route.params.oneTrip._id
     const foundDestinations = oneTrip.route.params.oneTrip.destinations
     
-    const [trip, setTrip] = useState()
     const [destInput, setDestInput] = useState({
-        name: [""]
+        oneTrip,
+        destinations: [...foundDestinations, { name: "" }]
     })
     const [todoInput, setTodoInput] = useState({
         todo: ""
     })
 
-    // const getTrip = async () => {
-    //     const tripsResults = await fetch("https://roadtripper-back.herokuapp.com/trips/");
-    //     const parsedTrips = await tripsResults.json();
-    //     setTrip(parsedTrips);
-    //   }
     const newDestination = async(id, input) => {
-        // console.log(oneTrip)
-        // console.log(foundDestinations)
-        console.log(oneTrip)
+        console.log(destInput)
         await fetch("https://roadtripper-back.herokuapp.com/trips/" + id, {
             method: "PUT",
             body: JSON.stringify(input),
@@ -42,14 +35,9 @@ function Destinations({oneTrip}) {
             body: JSON.stringify(oneTrip, input),
             headers: {
                 "Content-Type": "application/json",
-                // "Access-Control-Allow-Origin": "*"
             }
         })
     }
-
-    // useEffect(() => {
-    //     getTrip();
-    // }, [trip]);
     
     return (
         <ImageBackground 
@@ -82,7 +70,7 @@ function Destinations({oneTrip}) {
                     </>
                 ))
             }
-            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setDestInput({ ...destInput, name : text})}} onSubmitEditing={()=>{newDestination(oneTripId, destInput)}} placeholder="Rename Trip"/> 
+            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setDestInput({ ...destInput, ["destinations"]: [...foundDestinations, { ["name"]: text }]})}} onSubmitEditing={()=>{newDestination(oneTripId, destInput)}} placeholder="Rename Trip"/> 
         </ScrollView>
                 
             </ImageBackground>
