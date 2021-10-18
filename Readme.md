@@ -20,6 +20,15 @@ Install road-tripper-front with npm
 
 Open via simulator from XCode
 
+## User Stories
+
+- User should be able to register, log in, log out
+- User should be able to create a road trip (from, to) with destinations along the way
+- User will land on Trips page with mapped list of trips created linking to individual destinations/checklist/images page
+- User should be able to have check list of what they’ll need (essentials)
+- User should be able to upload pictures (documents, memories)
+- User should be able to associate pictures with locations
+
 ## Lessons Learned
 
 - React Native, while similar to React, has some interesting ways of passing props
