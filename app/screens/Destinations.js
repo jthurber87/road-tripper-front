@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, View, Text, TextInput, TouchableOpacity, S
 import colors from '../config/colors';
 
 function Destinations({oneTrip}) {
-
+    
     const oneTripId = oneTrip.route.params.oneTrip._id
     const foundDestinations = oneTrip.route.params.oneTrip.destinations
     
@@ -70,7 +70,7 @@ function Destinations({oneTrip}) {
                     </>
                 ))
             }
-            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setDestInput({ ...destInput, ["destinations"]: [...foundDestinations, { ["name"]: text }]})}} onSubmitEditing={()=>{newDestination(oneTripId, destInput)}} placeholder="Rename Trip"/> 
+            <TextInput style={styles.inputBox} autoCorrect={false} onChangeText={text=>{setDestInput({ ...destInput, ["destinations"]: [...foundDestinations, { ["name"]: text }]})}} onSubmitEditing={()=>{newDestination(oneTripId, destInput)}} placeholder="Add a destination"/> 
         </ScrollView>
                 
             </ImageBackground>

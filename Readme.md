@@ -121,6 +121,25 @@ Open via simulator from XCode
 
 - Creating mobile apps with React Native is fun! Once you have the hang of it, you can see live updates on a simulated iPhone or Android device as you save.
 
+## Code Snippets
+
+- Adding destinations
+
+```
+const [destInput, setDestInput] = useState({
+        oneTrip,
+        destinations: [...foundDestinations, { name: "" }]
+    })
+
+<TextInput
+  style={styles.inputBox}
+  autoCorrect={false}
+  onChangeText={text=>{setDestInput({ ...destInput, ["destinations"]: [...foundDestinations, { ["name"]: text }]})}}
+  onSubmitEditing={()=>{newDestination(oneTripId, destInput)}}
+  placeholder="Add a destination"
+/>
+```
+
 ## Roadmap
 
 - Add AWS integration
