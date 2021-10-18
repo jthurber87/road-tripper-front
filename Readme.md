@@ -9,6 +9,17 @@ Easily organize your road trip so you can spend more time enjoying it.
 - Add todo's to your destinations (i.e. Paradise, Ohanapecosh)
 - Add photos to associate with your destinations, as well as important documents.
 
+## Technologies
+
+- React Native
+- Node.js
+- Expo
+- Express
+- MongoDB Atlas
+- Heroku
+- Git
+- Github
+
 ## Installation
 
 Install road-tripper-front with npm
@@ -135,6 +146,8 @@ Open via simulator from XCode
 - Adding destinations
 
 ```
+const foundDestinations = oneTrip.route.params.oneTrip.destinations
+
 const [destInput, setDestInput] = useState({
         oneTrip,
         destinations: [...foundDestinations, { name: "" }]
